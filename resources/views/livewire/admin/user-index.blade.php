@@ -25,10 +25,10 @@
                                     <th scope="col">Rol</th>
                                     <th scope="col">Última vez</th>
                                     <th scope="col">Estado</th>
-                                    <th scope="col">Accion</th>
+                                    <th scope="col" style="text-align: center;">Acción</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody >
                                 @foreach ($users as $usuario)
                                     <tr>
                                         <td>{{ $usuario->id }}</td>
@@ -49,8 +49,8 @@
                                         <td class="text-center" style="display: inline-block"><span
                                                 class="badge {{ $usuario->estado ? 'bg-success' : 'bg-secondary' }}">{{ $usuario->estado ? 'ACTIVO' : 'INACTIVO' }}</span>
                                         </td>
-                                        <td>
-                                            <div class="btn-group" role="group" aria-label="Basic example">
+                                        <td style="text-align: right;">
+                                            <div class="btn-group" role="group" aria-label="Basic example" >
 
                                                 <a href="{{ url('/empleados/' . $usuario->id . '/') }}"
                                                     class="btn btn-success">
@@ -61,19 +61,15 @@
                                                     <i class="fas fa-pen"></i>
                                                 </a>
 
-                                                <form action="{{ url('/empleados/' . $usuario->id) }}" method="post">
+                                                <form action="{{ url('/users/' . $usuario->id) }}" method="post">
                                                     @csrf
                                                     {{ method_field('DELETE') }}
                                                     <button type="submit"
-                                                        onclick="return confirm('¿Estas Seguro de Eliminarlo?')"
-                                                        class="btn btn-danger"><i class="fas fa-trash"></i>
+                                                        onclick="return confirm('¿Estás Seguro de Eliminarlo?')"
+                                                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2.5 rounded">
+                                                        <i class="fas fa-trash text-xg w-6 h-6"></i>
                                                     </button>
                                                 </form>
-
-                                                <a href="{{ url('/empleados-bombas/' . $usuario->id) }}"
-                                                    class="btn btn-info">
-                                                    <i class="fas fa-fw fa-gas-pump"></i>
-                                                </a>
 
                                                 {{-- <tbody>
                                         @foreach ($users as $user)
