@@ -78,3 +78,4 @@ para dar permisos y privilegios de direcciones o rutas, solamente hay que usar l
 esto muestra que dentro de can hay una vista que vamos a protegen para los usuarios que solamente tengan permiso de home (se podría decir).
 
 si vamos a RoleSeeder y nos fijamos que la direccion home solo se le asignó al administrador, entonces si ponemos dentro de can a home, esa vista solo podrá ver el administrador.
+(mirar video: 04 - Como ocultar botones según rol y 05 - como proteger rutas de acuerdo al rol).
