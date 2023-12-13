@@ -44,5 +44,6 @@ Route::middleware([
     Route::get('/card', [CardProController::class, 'index'])->name('card');
     Route::get('/cardBusiness', [CardBusinessController::class, 'index'])->name('cardBusiness');
 
-    /* Route::resource('roles', RoleController::class)->names('admin.roles'); */
+    Route::get('/showAdmins', [UserController::class, 'showAdmins'])->name('showAdmins');
+    Route::get('/showCliente', [UserController::class, 'showCliente'])->name('showcliente');
 });

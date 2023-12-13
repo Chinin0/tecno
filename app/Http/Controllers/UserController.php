@@ -6,6 +6,7 @@ use Livewire\Features\SupportFormObjects\Form;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Laravel\Fortify\Rules\Password;
@@ -30,34 +31,53 @@ class UserController extends Controller
         $roles = Role::all();
         return view('admin.users.create', compact('roles'));
     }
+    public function showAdmins()
+    {
+        $users = User::all();
+        $admins = User::role('Admin')->get();
+
+        return view('admin.users.showAdmins', compact('admins', 'users'));
+    }
+
+    public function showCliente()
+    {
+        $users = User::all();
+        /* $cliente = User::role('Cliente')->get(); */
+        $cliente = User::whereDoesntHave('roles', function ($query) {
+            $query->where('name', 'Cliente');
+        })->get();
+        
+
+        return view('admin.users.showCliente', compact('cliente', 'users'));
+    }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-{
-    $request->validate([
-        'name' => ['required', 'string', 'max:255'],
-        'email' => ['required', 'email', 'max:255', 'unique:users'],
-        'direccion' => ['required', 'string', 'max:255'],
-        'telefono' => ['required', 'numeric'],
-        'password' => ['required', new Password],
-        'role' => ['required', Rule::in(['Admin', 'Cliente'])],
-    ]);
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255', 'unique:users'],
+            'direccion' => ['required', 'string', 'max:255'],
+            'telefono' => ['required', 'numeric'],
+            'password' => ['required', new Password],
+            'role' => ['required', Rule::in(['Admin', 'Cliente'])],
+        ]);
 
-    $user = User::create([
-        'name' => $request->input('name'),
-        'email' => $request->input('email'),
-        'direccion' => $request->input('direccion'),
-        'telefono' => $request->input('telefono'),
-        'password' => Hash::make($request->input('password')),
-    ]);
+        $user = User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'direccion' => $request->input('direccion'),
+            'telefono' => $request->input('telefono'),
+            'password' => Hash::make($request->input('password')),
+        ]);
 
-    // Asignar el rol al usuario
-    $user->assignRole($request->input('role'));
+        // Asignar el rol al usuario
+        $user->assignRole($request->input('role'));
 
-    return redirect()->route('users.index')->with('success', 'Usuario registrado exitosamente');
-}
+        return redirect()->route('users.index')->with('success', 'Usuario registrado exitosamente');
+    }
 
     /**
      * Display the specified resource.
