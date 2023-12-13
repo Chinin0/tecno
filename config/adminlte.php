@@ -253,7 +253,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => '/',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -313,11 +313,7 @@ return [
         ],
 
 
-        [
-            'text'        => 'Usuarios',
-            'url'         => 'users',
-            'icon'        => 'fa fa-users fa-fw',
-        ],
+        
         [
             'text'        => 'Productos',
             'url'         => '#',
@@ -384,6 +380,28 @@ return [
             ],
         ],
         ['header' => 'labels'],
+        [
+            'text'    => 'Administrar',
+            'icon'    => 'fa fa-users fa-fw',
+            'submenu' => [
+                [
+                    'text'        => 'Usuarios',
+                    'url'         => 'users',
+                    'icon'        => 'fa fa-users fa-fw',
+                ],
+                [
+                    'text'    => 'Administrador',
+                    'url'     => 'users',
+                    'icon'    => 'fas fa-user-tie',
+                ],
+                
+                [
+                    'text'    => 'Cliente',
+                    'url'     => 'users',
+                    'icon'    => 'fas fa-user',
+                ],
+            ],
+        ],
         [
             'text'       => 'important',
             'icon_color' => 'red',

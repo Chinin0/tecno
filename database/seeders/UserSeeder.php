@@ -20,6 +20,6 @@ class UserSeeder extends Seeder
             'telefono'=>'+591 79914901',
         ])->assignRole('Admin');
 
-        User::factory(99)->create();
+        User::factory(4)->create();
     }
 }

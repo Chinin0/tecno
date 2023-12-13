@@ -64,3 +64,17 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+
+//////////////////////////////////////////
+para dar permisos y privilegios de direcciones o rutas, solamente hay que usar la instancia can de HTML por ejemplo:
+@can('home')
+        <div class="d-grid gap-2">
+            <a class="btn btn-success" href="{{ route('users.create') }}"> crear </a>
+        </div>
+    @endcan
+
+esto muestra que dentro de can hay una vista que vamos a protegen para los usuarios que solamente tengan permiso de home (se podría decir).
+
+si vamos a RoleSeeder y nos fijamos que la direccion home solo se le asignó al administrador, entonces si ponemos dentro de can a home, esa vista solo podrá ver el administrador.

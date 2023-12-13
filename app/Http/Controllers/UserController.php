@@ -6,6 +6,9 @@ use Livewire\Features\SupportFormObjects\Form;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
+use Laravel\Fortify\Rules\Password;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
@@ -24,16 +27,37 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $roles = Role::all();
+        return view('admin.users.create', compact('roles'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
-    }
+{
+    $request->validate([
+        'name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'email', 'max:255', 'unique:users'],
+        'direccion' => ['required', 'string', 'max:255'],
+        'telefono' => ['required', 'numeric'],
+        'password' => ['required', new Password],
+        'role' => ['required', Rule::in(['Admin', 'Cliente'])],
+    ]);
+
+    $user = User::create([
+        'name' => $request->input('name'),
+        'email' => $request->input('email'),
+        'direccion' => $request->input('direccion'),
+        'telefono' => $request->input('telefono'),
+        'password' => Hash::make($request->input('password')),
+    ]);
+
+    // Asignar el rol al usuario
+    $user->assignRole($request->input('role'));
+
+    return redirect()->route('users.index')->with('success', 'Usuario registrado exitosamente');
+}
 
     /**
      * Display the specified resource.
@@ -93,6 +117,8 @@ class UserController extends Controller
         return redirect()->route('users.index', $user)->with('status', 'Empleado Actualizado Exitosamente!');
     }*/
 
+    // ...
+
     public function update(Request $request, $user_id)
     {
         $user = User::find($user_id);
@@ -107,9 +133,12 @@ class UserController extends Controller
             'direccion' => $request->input('direccion'),
             'telefono' => $request->input('telefono'),
             'estado' => $request->input('estado'),
-            'role' => $request->input('role'),
             // Asegúrate de incluir todos los campos que deseas actualizar
         ]);
+
+        // Actualizar el rol del usuario
+        $selectedRole = Role::find($request->input('role'));
+        $user->syncRoles([$selectedRole->name]);
 
         // Puedes manejar la actualización de la foto de perfil si es necesario
         if ($request->hasFile('foto_perfil')) {
@@ -118,6 +147,7 @@ class UserController extends Controller
 
         return redirect()->route('users.index')->with('status', 'Empleado actualizado exitosamente');
     }
+
 
 
     /**
