@@ -21,8 +21,8 @@ class RoleSeeder extends Seeder
 
         Permission::create(['name'=>'plans'])->syncRoles([$role1, $role2]);
         Permission::create(['name'=>'dashboard'])->syncRoles([$role1, $role2]);
-        Permission::create(['name'=>'dashboardPRO'])->syncRoles([$role1, $role2]);
+        Permission::create(['name'=>'dashboardPRO'])->syncRoles([$role1]);
         Permission::create(['name'=>'card'])->syncRoles([$role1, $role2]);
-        Permission::create(['name'=>'cardBusiness'])->syncRoles([$role1, $role2]);
+        Permission::create(['name'=>'cardBusiness'])->syncRoles([$role1]);
 }
 }

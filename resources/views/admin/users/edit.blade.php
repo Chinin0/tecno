@@ -50,7 +50,7 @@
                 <label for="role">Rol</label>
                 <select name="role" class="form-control select2" style="width: 100%;">
                     @foreach ($roles as $role)
-                    <option value="{{ $role->id }}"> {{ $role->name }}</option>
+                        <option value="{{ $role->id }}" {{ $user->hasRole($role->name) ? 'selected' : '' }}> {{ $role->name }}</option>
                     @endforeach
                 </select>
             </div>

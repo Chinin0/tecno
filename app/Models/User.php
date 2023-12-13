@@ -37,7 +37,7 @@ class User extends Authenticatable
         'foto_perfil',
     ];
 
-    public function role_name()
+    /* public function role_name()
     {
         $role = DB::table('model_has_roles')
             ->join('roles', 'roles.id', '=', 'model_has_roles.role_id')
@@ -47,6 +47,13 @@ class User extends Authenticatable
             ->first();
             
             return $role? $role->name:"";
+    } */
+
+    public function role_name()
+    {
+        $role = $this->roles()->first();
+
+        return $role ? $role->name : "";
     }
     /**
      * The attributes that should be hidden for serialization.
