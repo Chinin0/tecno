@@ -313,7 +313,12 @@ return [
         ],
 
 
-        
+        [
+            'text' => 'perfil',
+            'url'  => 'admin/settings',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+
         [
             'text'        => 'Productos',
             'url'         => '#',
@@ -330,12 +335,34 @@ return [
             'url'         => 'card',
             'icon'        => 'fa fa-credit-card',
         ],
-        ['header' => 'account_settings'],
+        ['header' => 'ADMINISTRATIVO'],
+
         [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'text'    => 'Administrar',
+            'icon'    => 'fa fa-users fa-fw',
+            'submenu' => [
+                [
+                    'text'        => 'Usuarios',
+                    'url'         => 'users',
+                    'icon'        => 'fa fa-users fa-fw',
+                ],
+                [
+                    'text'    => 'Administrador',
+                    'url'     => 'showAdmins',
+                    'icon'    => 'fas fa-user-tie',
+                ],
+                
+                [
+                    'text'    => 'Cliente',
+                    'url'     => 'showCliente',
+                    'icon'    => 'fas fa-user',
+                ],
+            ],
         ],
+        
+        
+        ['header' => 'labels'],
+
         [
             'text' => 'change_password',
             'url'  => 'admin/settings',
@@ -379,29 +406,7 @@ return [
                 ],
             ],
         ],
-        ['header' => 'labels'],
-        [
-            'text'    => 'Administrar',
-            'icon'    => 'fa fa-users fa-fw',
-            'submenu' => [
-                [
-                    'text'        => 'Usuarios',
-                    'url'         => 'users',
-                    'icon'        => 'fa fa-users fa-fw',
-                ],
-                [
-                    'text'    => 'Administrador',
-                    'url'     => 'users',
-                    'icon'    => 'fas fa-user-tie',
-                ],
-                
-                [
-                    'text'    => 'Cliente',
-                    'url'     => 'users',
-                    'icon'    => 'fas fa-user',
-                ],
-            ],
-        ],
+        
         [
             'text'       => 'important',
             'icon_color' => 'red',

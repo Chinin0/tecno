@@ -1,10 +1,11 @@
 <div>
 
-    @can('home')
+    {{-- @can('home')
         <div class="d-grid gap-2">
             <a class="btn btn-success" href="{{ route('users.create') }}"> crear </a>
         </div>
-    @endcan
+    @endcan --}}
+   {{--  <a href="{{ route('users.showAdmins') }}">Ver Administradores</a> --}}
 
     <div class="card">
         <!-- buscador-->
