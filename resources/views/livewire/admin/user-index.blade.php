@@ -1,11 +1,10 @@
 <div>
 
-    {{-- @can('home')
+    @can('home')
         <div class="d-grid gap-2">
             <a class="btn btn-success" href="{{ route('users.create') }}"> crear </a>
         </div>
-    @endcan --}}
-   {{--  <a href="{{ route('users.showAdmins') }}">Ver Administradores</a> --}}
+    @endcan
 
     <div class="card">
         <!-- buscador-->
@@ -34,9 +33,13 @@
                             @foreach ($users as $usuario)
                                 <tr>
                                     <td>{{ $usuario->id }}</td>
-                                    <th scope="row"> <img
-                                            src="{{ $usuario->foto_perfil? app('firebase.storage')->getBucket()->object($usuario->foto_perfil)->signedUrl(Carbon\Carbon::now()->addSeconds(5)): asset('/img/user-default.jpeg') }}"
-                                            alt="" height="80px"></th>
+                                    <th scope="row"> 
+                                        <img
+                                            src="{{ $usuario->foto_perfil ? app('firebase.storage')->getBucket()->object($usuario->foto_perfil)->signedUrl(Carbon\Carbon::now()->addSeconds(5)) : asset('/img/user-default.jpeg') }}"
+                                            alt=""
+                                            class="h-16 w-16" 
+                                        >
+                                    </th>
                                     <td>{{ $usuario->name }}</td>
                                     <td>{{ $usuario->telefono }}</td>
                                     <td>{{ $usuario->role_name() }}</td>
@@ -54,8 +57,7 @@
                                     <td style="text-align: right;">
                                         <div class="btn-group" role="group" aria-label="Basic example">
 
-                                            <a href="{{ url('/empleados/' . $usuario->id . '/') }}"
-                                                class="btn btn-success">
+                                            <a href="{{ route('users.show', ['user' => $usuario->id]) }}" class="btn btn-success">
                                                 <i class="fas fa-eye"></i>
                                             </a>
 
