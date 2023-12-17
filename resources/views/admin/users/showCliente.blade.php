@@ -37,12 +37,16 @@
                             </thead>
                             <tbody>
                                 @foreach ($users as $usuario)
-                                    @if (!$usuario->hasRole('Admin'))
+                                    @if (!$usuario->hasRole('Administrador'))
                                         <tr>
                                             <td>{{ $usuario->id }}</td>
-                                            <th scope="row"> <img
-                                                    src="{{ $usuario->foto_perfil? app('firebase.storage')->getBucket()->object($usuario->foto_perfil)->signedUrl(Carbon\Carbon::now()->addSeconds(5)): asset('/img/user-default.jpeg') }}"
-                                                    alt="" height="80px"></th>
+                                            <th scope="row"> 
+                                                <img
+                                                    src="{{ $usuario->foto_perfil ? app('firebase.storage')->getBucket()->object($usuario->foto_perfil)->signedUrl(Carbon\Carbon::now()->addSeconds(5)) : asset('/img/user-default.jpeg') }}"
+                                                    alt=""
+                                                    class="h-16 w-16" 
+                                                >
+                                            </th>
                                             <td>{{ $usuario->name }}</td>
                                             <td>{{ $usuario->telefono }}</td>
                                             <td>{{ $usuario->role_name() }}</td>

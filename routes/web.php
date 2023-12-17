@@ -36,7 +36,7 @@ Route::middleware([
 
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
-    Route::resource('/users', UserController::class)->names('users');
+    Route::resource('/users', UserController::class)->middleware('can:home')->names('users');
 
     Route::get('/plans', [PlansController::class, 'index'])->name('plans');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -46,4 +46,7 @@ Route::middleware([
 
     Route::get('/showAdmins', [UserController::class, 'showAdmins'])->name('showAdmins');
     Route::get('/showCliente', [UserController::class, 'showCliente'])->name('showcliente');
+    /* Route::get('/show', [UserController::class, 'show'])->name('show'); */
+    Route::get('/user/{id}', [UserController::class, 'show'])->name('show');
+
 });

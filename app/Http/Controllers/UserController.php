@@ -6,6 +6,7 @@ use Livewire\Features\SupportFormObjects\Form;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -34,7 +35,7 @@ class UserController extends Controller
     public function showAdmins()
     {
         $users = User::all();
-        $admins = User::role('Admin')->get();
+        $admins = User::role('Administrador')->get();
 
         return view('admin.users.showAdmins', compact('admins', 'users'));
     }
@@ -62,7 +63,7 @@ class UserController extends Controller
             'direccion' => ['required', 'string', 'max:255'],
             'telefono' => ['required', 'numeric'],
             'password' => ['required', new Password],
-            'role' => ['required', Rule::in(['Admin', 'Cliente'])],
+            'role' => ['required', Rule::in(['Administrador', 'Cliente'])],
         ]);
 
         $user = User::create([
@@ -82,9 +83,19 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $usuario = User::find($id);
+
+        $image = asset('/img/user-default.jpeg');
+        if ($usuario->foto_perfil) {
+            $expiresAt = Carbon::now()->addSeconds(5);
+            $imageReference = app('firebase.storage')->getBucket()->object($usuario->foto_perfil);
+            if ($imageReference->exists()) {
+                $image = $imageReference->signedUrl($expiresAt);
+            };
+        }
+        return view('admin.users.show', compact('usuario', 'image'));
     }
 
     /**

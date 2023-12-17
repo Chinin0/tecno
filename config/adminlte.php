@@ -340,6 +340,7 @@ return [
         [
             'text'    => 'Administrar',
             'icon'    => 'fa fa-users fa-fw',
+            'can'     => 'home',
             'submenu' => [
                 [
                     'text'        => 'Usuarios',
@@ -367,10 +368,12 @@ return [
             'text' => 'change_password',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',
+            'can'     => 'home',
         ],
         [
             'text'    => 'multilevel',
             'icon'    => 'fas fa-fw fa-share',
+            'can'     => 'home',
             'submenu' => [
                 [
                     'text' => 'level_one',
@@ -411,16 +414,19 @@ return [
             'text'       => 'important',
             'icon_color' => 'red',
             'url'        => '#',
+            'can'     => 'home',
         ],
         [
             'text'       => 'warning',
             'icon_color' => 'yellow',
             'url'        => '#',
+            'can'     => 'home',
         ],
         [
             'text'       => 'information',
             'icon_color' => 'cyan',
             'url'        => '#',
+            'can'     => 'home',
         ],
     ],
 
