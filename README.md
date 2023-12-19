@@ -79,3 +79,8 @@ esto muestra que dentro de can hay una vista que vamos a protegen para los usuar
 
 si vamos a RoleSeeder y nos fijamos que la direccion home solo se le asignó al administrador, entonces si ponemos dentro de can a home, esa vista solo podrá ver el administrador.
 (mirar video: 04 - Como ocultar botones según rol y 05 - como proteger rutas de acuerdo al rol).
+
+
+///////////////////////////////////////////
+Yajra DataTables es una biblioteca para Laravel que facilita la implementación de tablas de datos interactivas y dinámicas en tus aplicaciones web. DataTables simplifica la paginación, filtrado, ordenamiento y búsqueda de conjuntos de datos tabulares en el lado del cliente, ofreciendo una experiencia de usuario mejorada para la visualización y manipulación de datos tabulares.
+para eso instalamos composer require yajra/laravel-datatables-oracle

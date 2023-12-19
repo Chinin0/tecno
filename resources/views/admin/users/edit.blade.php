@@ -9,9 +9,9 @@
 <div class="card">
     <div class="card-body">
         <!--aqui empieza el codigo del formulario-->
-        <form method="POST" enctype="multipart/form-data" action="{{ route('users.update', $user) }}">
-            @method('PUT')
+        <form method="post" action="{{ route('users.update', $user->id) }}" enctype="multipart/form-data">
             @csrf
+            @method('PATCH')
 
             <div class="mb-3">
                 <label for="name" class="form-label">nombre</label>
@@ -58,6 +58,7 @@
                 <label for="foto_perfil" class="form-label">Foto de perfil</label>
                 <input name="foto_perfil" type="file" accept="image/*" id="foto_perfil">
             </div>
+            
             <div class="row mb-0">
 
                 <div class="col-md-10 offset-md-2">
