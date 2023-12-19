@@ -29,7 +29,7 @@ class UserFactory extends Factory
             'two_factor_recovery_codes' => null,
             'telefono' => $this->faker->phoneNumber,
             'remember_token' => Str::random(10),
-            'profile_photo_path' => null,
+            'profile_photo_path' => $this->faker->imageUrl(200, 200, 'people'),
             'current_team_id' => null,
         ];
     }

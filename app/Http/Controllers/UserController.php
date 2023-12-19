@@ -47,7 +47,7 @@ class UserController extends Controller
         $cliente = User::whereDoesntHave('roles', function ($query) {
             $query->where('name', 'Cliente');
         })->get();
-        
+
 
         return view('admin.users.showCliente', compact('cliente', 'users'));
     }
@@ -164,20 +164,22 @@ class UserController extends Controller
             'direccion' => $request->input('direccion'),
             'telefono' => $request->input('telefono'),
             'estado' => $request->input('estado'),
-            // Asegúrate de incluir todos los campos que deseas actualizar
+            // Otras actualizaciones...
+
+            // Actualiza la ruta de la foto de perfil solo si se proporciona una nueva foto
+            'profile_photo_path' => $request->hasFile('foto_perfil')
+                ? $request->file('foto_perfil')->store('profile-photos', 'public')
+                : $user->profile_photo_path,
         ]);
 
         // Actualizar el rol del usuario
         $selectedRole = Role::find($request->input('role'));
         $user->syncRoles([$selectedRole->name]);
 
-        // Puedes manejar la actualización de la foto de perfil si es necesario
-        if ($request->hasFile('foto_perfil')) {
-            // Lógica para manejar la actualización de la foto de perfil
-        }
-
         return redirect()->route('users.index')->with('status', 'Empleado actualizado exitosamente');
     }
+
+
 
 
 

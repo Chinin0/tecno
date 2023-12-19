@@ -321,7 +321,7 @@ return [
 
         [
             'text'        => 'Productos',
-            'url'         => '#',
+            'url'         => '/productos',
             'icon'        => 'fas fa-fw fa-box-open',
         ],
         [
