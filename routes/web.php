@@ -50,6 +50,11 @@ Route::middleware([
     /* Route::get('/show', [UserController::class, 'show'])->name('show'); */
     Route::get('/user/{id}', [UserController::class, 'show'])->name('show');
     /* Route::get('/productos', [ProductoController::class, 'index'])->name('productos'); */
-    Route::resource('productos',ProductoController::class);
+    Route::resource('productos', ProductoController::class);
 
+    //////////////carrito////////
+    Route::get('/admin/catalogo', [ProductoController::class, 'ListarC'])->name('admin.listarcatalogo');
+    Route::get('/admin/carrito', [ProductoController::class, 'ListarCarrito'])->name('admin.carrito');
+
+    //Route::get('/cliente/carrito',[CatalogoClienteController::class,'ListarCarrito'])->middleware('auth.admin')->name('cliente.carrito');
 });
