@@ -29,7 +29,7 @@ class ProductoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    
+
 
     public function store(Request $request)
     {
@@ -83,5 +83,39 @@ class ProductoController extends Controller
         } else {
             return redirect('/productos')->with('error', 'Producto no encontrado');
         }
+    }
+
+
+    ///////carrito
+
+    public function ListarC()
+    {
+        $user = producto::all();
+        return view('productos.ProductoRegister', compact('user'));
+    }
+
+
+    public function ListarCarrito()
+    {
+        $total = $this->Monto_total();
+        return view('productos.ProductoCarrito', compact('total'));
+    }
+
+    public function Monto_total()
+    {
+        $total = 0;
+        foreach ($this->obtenerProductos() as $producto) {
+            $total += $producto->Subtotal;
+        }
+        return $total;
+    }
+
+    private function obtenerProductos()
+    {
+        $productos = session("productos");
+        if (!$productos) {
+            $productos = [];
+        }
+        return $productos;
     }
 }

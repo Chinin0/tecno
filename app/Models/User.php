@@ -34,7 +34,7 @@ class User extends Authenticatable
         'direccion',
         'telefono',
         'estado',
-        'profile_photo_path',
+        'profile_photo_pathy',
     ];
 
     /* public function role_name()
